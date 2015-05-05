@@ -34,7 +34,7 @@ class MemcacheConnector {
 		}
 
 		$memcachedStatus = $memcached->getVersion();
-
+print_r($memcachedStatus);
 		if ( ! is_array($memcachedStatus))
 		{
 			throw new RuntimeException("No Memcached servers added.");
