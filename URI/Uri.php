@@ -8,12 +8,32 @@ namespace Uri;
 class Uri {
 
 	/**
-	 * script file name;
+	 * script file name.
 	 *
 	 * @var string
 	 */
-	private $script_name = null;
+	public $script_name = null;
 
+	/**
+	 * http request query string.
+	 *
+	 * @var string
+	 */
+	public $query_string = null;
+
+	/**
+	 * http request uri string.
+	 *
+	 * @var string
+	 */
+	public $request_uri = null;
+
+	/**
+	 * http request method.
+	 *
+	 * @var string
+	 */
+	public $method = null;
 
 	/**
 	 * Create a new Uri instance.
@@ -24,16 +44,18 @@ class Uri {
 	}
 
 	/**
-	 * Parser Http request uri .
+	 * Parser Http request uri.
 	 *
 	 * @return bool
 	 */
 	public function _parse_request_uri()
 	{
+    	$request_uri 	= parse_url($_SERVER['REQUEST_URI']);
+		$query 		= isset($request_uri['query']) ? $request_uri['query'] : '';
+		$uri 	= isset($request_uri['path']) ? $request_uri['path'] : '';
 
-		$request_uri = parse_url($_SERVER['REQUEST_URI']);
-
-		return ;
+		// return explode("/", trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])), "/"));
+		$this->request_uri = trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])));
 	}
 
 	/**
@@ -42,16 +64,14 @@ class Uri {
 	 */
 	public function _parse_query_string()
 	{
-		parse_str(urldecode($_SERVER['QUERY_STRING']), $query_string);
+		if ( trim( $_SERVER['QUERY_STRING'], '/' ) === '' )
+		{
+			return '';
+		}
 
-		return $query_string;
-	}
+		parse_str( $_SERVER['QUERY_STRING'], $this->query_string );
 
-	/**
-	 *
-	 */
-	public function _parse_argv($key, $default = null)
-	{
+		return $this->query_string;
 	}
 
 	/**
