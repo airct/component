@@ -3,37 +3,9 @@
  * Clone from laravel
  */
 
-namespace Uri;
+// namespace Uri;
 
 class Uri {
-
-	/**
-	 * script file name.
-	 *
-	 * @var string
-	 */
-	public $script_name = null;
-
-	/**
-	 * http request query string.
-	 *
-	 * @var string
-	 */
-	public $query_string = null;
-
-	/**
-	 * http request uri string.
-	 *
-	 * @var string
-	 */
-	public $request_uri = null;
-
-	/**
-	 * http request method.
-	 *
-	 * @var string
-	 */
-	public $method = null;
 
 	/**
 	 * Create a new Uri instance.
@@ -55,7 +27,7 @@ class Uri {
 		$uri 	= isset($request_uri['path']) ? $request_uri['path'] : '';
 
 		// return explode("/", trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])), "/"));
-		$this->request_uri = trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])));
+		return trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])));
 	}
 
 	/**
@@ -69,9 +41,9 @@ class Uri {
 			return '';
 		}
 
-		parse_str( $_SERVER['QUERY_STRING'], $this->query_string );
+		parse_str( $_SERVER['QUERY_STRING'], $query_string );
 
-		return $this->query_string;
+		return $query_string;
 	}
 
 	/**
@@ -79,9 +51,12 @@ class Uri {
 	 *
 	 * @return void
 	 */
-	public function method()
+	public function methods()
 	{
-		! empty( $_SERVER['REQUEST_METHOD'] ) && $this->method = $_SERVER['REQUEST_METHOD'];
+		if( ! empty( $_SERVER['REQUEST_METHOD'] ) )
+			return $_SERVER['REQUEST_METHOD'];
+	
+		return '';
 	}
 
 	/**
@@ -91,8 +66,22 @@ class Uri {
 	 */
 	public function script_name()
 	{
-		! empty( $_SERVER['SCRIPT_NAME'] ) && $this->script_name = $_SERVER['SCRIPT_NAME'];
+		if( ! empty( $_SERVER['SCRIPT_NAME'] ) )
+			return $_SERVER['SCRIPT_NAME'];
+		
+		return '';
 	}
 	
+	/**
+	 * Get host domain.
+	 *
+	 * @return void
+	 */
+	public host() 
+	{
+		if( ! empty( $_SERVER['HTTP_HOST'] ) )
+			return $_SERVER['HTTP_HOST'];
+		
+		return '';
+	}	
 }
-
