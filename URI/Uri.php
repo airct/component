@@ -3,9 +3,16 @@
  * Clone from laravel
  */
 
-// namespace Uri;
+namespace Uri;
 
 class Uri {
+
+	/**
+	 * URI segments
+	 *
+	 * @var	array
+	 */
+	public $segments = array();
 
 	/**
 	 * Create a new Uri instance.
@@ -77,7 +84,7 @@ class Uri {
 	 *
 	 * @return void
 	 */
-	public host() 
+	public function host()
 	{
 		if( ! empty( $_SERVER['HTTP_HOST'] ) )
 			return $_SERVER['HTTP_HOST'];
