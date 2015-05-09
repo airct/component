@@ -34,7 +34,7 @@ class Uri {
 		$uri 	= isset($request_uri['path']) ? $request_uri['path'] : '';
 
 		// return explode("/", trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])), "/"));
-		return trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])));
+		return trim(substr($uri, strlen($_SERVER['SCRIPT_NAME'])), "/");
 	}
 
 	/**
