@@ -82,8 +82,6 @@ class CacheService {
 	 */
 	public function put($key, $value, $minutes)
 	{
-		// $minutes = $this->getMinutes($minutes);
-
 		if ( ! is_null($minutes))
 		{
 			$this->store->put($key, $value, $minutes);
@@ -136,9 +134,7 @@ class CacheService {
 	public function forget($key)
 	{
 		$success = $this->store->forget($key);
-
-		$this->fireCacheEvent('delete', [$key]);
-
+		
 		return $success;
 	}
 
