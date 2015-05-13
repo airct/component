@@ -1,21 +1,7 @@
 <?php
 
-function __autoload($class_name) {
-	echo "section C: " . $class_name;
-	echo "<BR />";
-    // require_once $class_name . '.php';
-}
-
-
-function myload() {
-	echo "section B: <BR />";
-}
-// use Cache\memcache;
-spl_autoload_register("myload");
 spl_autoload_register(function ($class) {
 
-	echo "section A: " . $class . "<BR />";
-	// exit;
     // project-specific namespace prefix
     $prefix = '';
 
@@ -45,18 +31,23 @@ spl_autoload_register(function ($class) {
 });
 
 
-use \Cache;
-
-$server = array(array('host' => 'localhost', 'port' => '11211', 'weight' => 1));
 
 
-$Cache = new Cache\CacheService(new Cache\MemcacheProvider($server), 'prefix_key');
+$route = new Route\Route;
+
+$route->run();
 
 
-$Cache->put("key1", "ssssCs00Caaaarrraa", 60);
-if($Cache->has("key2")) {
-	echo "yes";
-} else {
-	echo "no";
+if(0) {
+	$server = array(array('host' => 'localhost', 'port' => '11211', 'weight' => 1));
+	$Cache = new Cache\CacheService(new Cache\MemcacheProvider($server), 'prefix_key');
+
+
+	$Cache->put("key1", "ssssCs00Caaaarrraa", 60);
+	if($Cache->has("key2")) {
+		echo "yes";
+	} else {
+		echo "no";
+	}
+	echo $Cache->get("key1");
 }
-echo $Cache->get("key1");

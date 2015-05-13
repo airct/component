@@ -1,6 +1,6 @@
 <?php 
 /**
- * Clone from laravel
+ * Clone from CI
  */
 
 namespace Uri;
