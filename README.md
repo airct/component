@@ -3,7 +3,7 @@ component sets
 
 project
 ├── Component
-│ 	├──	Cache
+│   ├──	Cache
 │   │ 	├── CacheService.php
 │   │ 	├── ICache.php
 │   │ 	├── MemcacheConnector.php
@@ -18,7 +18,7 @@ project
 │   ├── member.php
 │   └── product.php
 ├── View
-│ 	└──	item
+│  	└──	item
 │    	├── layout_content.php
 │    	├── layout_left.php
 │    	└── layout_nav.php
